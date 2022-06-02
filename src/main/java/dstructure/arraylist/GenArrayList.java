@@ -1,4 +1,4 @@
-package dstructure;
+package dstructure.arraylist;
 
 public class GenArrayList<T> {
     //

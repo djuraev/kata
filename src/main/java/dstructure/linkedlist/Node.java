@@ -1,7 +1,5 @@
 package dstructure.linkedlist;
 
-import java.util.Comparator;
-import java.util.Objects;
 
 public class Node<T> {
     //
@@ -45,5 +43,14 @@ public class Node<T> {
         }
         Node<T> node = (Node<T>) ob;
         return node.getValue().equals(this.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        if (value != null) {
+            result = 31 * result + value.hashCode();
+        }
+        return result;
     }
 }
