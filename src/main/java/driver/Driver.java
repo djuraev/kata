@@ -26,7 +26,9 @@ public class Driver {
         ll.add(40);
         ll.add(10);
         ll.add(20);
-        ll.addAt(0, 100);
+        //ll.addAt(0, 100);
+        //ll.reverse();
+        ll.delete(-1);
         ll.printContent();
     }
 }

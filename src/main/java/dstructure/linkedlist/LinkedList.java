@@ -17,14 +17,14 @@ public class LinkedList<T> {
             return head;
         }
 
-        Node<T> currNode = head;
-        while (currNode.getNext() != null) {
-            currNode = currNode.getNext();
+        Node<T> currentNode = head;
+        while (currentNode.getNext() != null) {
+            currentNode = currentNode.getNext();
         }
 
-        currNode.setNext(new Node<>(value, null));
+        currentNode.setNext(new Node<>(value, null));
         size++;
-        return currNode.getNext();
+        return currentNode.getNext();
     }
 
     public Node<T> addToHead(T value) {
@@ -51,42 +51,79 @@ public class LinkedList<T> {
         if (isEmpty()) {
             return false;
         }
-        Node<T> currPtr = head;
-        while (currPtr != null) {
-            if (currPtr.getValue().equals(value)) {
+        Node<T> currentNode = head;
+        while (currentNode != null) {
+            if (currentNode.getValue().equals(value)) {
                 return true;
             }
-            currPtr = currPtr.getNext();
+            currentNode = currentNode.getNext();
         }
         return false;
     }
 
     public boolean isEmpty() {
         //
-        return head == null;
+        return head == null || size == 0;
     }
 
     public void addAt(int index, T value) {
         Node<T> node = new Node<>(value, null);
+        if (head == null) {
+            this.addToHead(value);
+            return;
+        }
         this.addAt(index, node);
     }
 
     public Node<T> addAt(int index, Node<T> node) {
         //
-        if (index > size) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
 
+        if (index == 0) {
+            this.addToHead(node.getValue());
+            return node;
+        }
+
         Node<T> currPtr = head;
+        Node<T> prevNode = null;
         int currentIndex = 0;
 
-        while (currPtr.getNext() != null && currentIndex < index-1) {
+        while (currPtr.getNext() != null && currentIndex < index) {
+            prevNode = currPtr;
             currPtr = currPtr.getNext();
             currentIndex++;
         }
-        node.setNext(currPtr.getNext());
-        currPtr.setNext(node);
+
+        prevNode.setNext(node);
+        node.setNext(currPtr);
         return node;
+    }
+
+    public Node<T> reverse() {
+        //
+        if (head == null) {
+            return null;
+        }
+
+        if (head.getNext() == null) {
+            return head;
+        }
+
+        Node<T> curNode = head;
+        Node<T> prevNode = null;
+        Node<T> nextNode;
+
+        while (curNode != null) {
+            nextNode = curNode.getNext();
+            curNode.setNext(prevNode);
+            prevNode = curNode;
+            curNode = nextNode;
+        }
+
+        this.head = prevNode;
+        return this.head;
     }
 
     public void printContent() {
@@ -99,5 +136,31 @@ public class LinkedList<T> {
             System.out.println(currPtr.getValue());
             currPtr = currPtr.getNext();
         }
+    }
+    public Node<T> delete (int index) {
+        //
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Node<T> curNode = head;
+        Node<T> prevNode = null;
+
+        int currIndex = 0;
+
+        while (curNode != null && currIndex < index) {
+            currIndex++;
+            prevNode = curNode;
+            curNode = curNode.getNext();
+        }
+
+        if (prevNode != null) {
+            prevNode.setNext(curNode.getNext());
+        }
+        else {
+            head = head.getNext();
+        }
+        size--;
+        return curNode;
     }
 }
