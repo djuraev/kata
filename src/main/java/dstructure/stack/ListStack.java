@@ -1,8 +1,7 @@
 package dstructure.stack;
 
+import dstructure.exceptions.StackEmptyException;
 import dstructure.linkedlist.DoublyLinkedList;
-import dstructure.linkedlist.iNode;
-
 import java.util.EmptyStackException;
 
 public class ListStack<T> {
@@ -22,7 +21,7 @@ public class ListStack<T> {
     public T pop() {
         //
         if (head.size() == 0) {
-            throw new EmptyStackException();
+            throw new StackEmptyException("Stack is empty.");
         }
         return this.head.removeFromHead();
     }
