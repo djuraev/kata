@@ -32,7 +32,7 @@ public class ArrayStack<T> {
         return value;
     }
 
-    public void push(T value) {
+    public boolean push(T value) {
         //
         float loadFactor = (float)(headPointer+1) / (float)size;
         if (loadFactor >= 0.8) {
@@ -44,6 +44,7 @@ public class ArrayStack<T> {
         }
         headPointer++;
         container[headPointer] = value;
+        return true;
     }
 
     public boolean search(T value) {
