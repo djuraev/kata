@@ -1,18 +1,20 @@
 package driver;
 
-import dstructure.linkedlist.DoublyLinkedList;
+import dstructure.stack.ListStack;
 
 public class Driver {
     //
     public static void main(String[] args) {
-        DoublyLinkedList<Integer> dll = new DoublyLinkedList<>();
-        dll.addValueToHead(1);
-        dll.addValueToHead(2);
-        dll.addValueToHead(3);
-        dll.addValueToTail(1);
-        dll.addValueToTail(2);
-        dll.addValueToTail(3);
-        dll.insertAt(5, 199);
-        dll.print();
+        ListStack<Integer> stack = new ListStack<>();
+        System.out.println(stack.isEmpty());
+        stack.push(100);
+        System.out.println(stack.isEmpty());
+        stack.push(200);
+        System.out.println(stack.isEmpty());
+        stack.push(300);
+        System.out.println(stack.isEmpty());
+        stack.push(400);
+
+        System.out.println("Contains: " + stack.search(1000));
     }
 }

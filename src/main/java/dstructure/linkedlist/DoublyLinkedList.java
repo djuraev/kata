@@ -1,5 +1,8 @@
 package dstructure.linkedlist;
 
+
+import dstructure.exceptions.EmptyListException;
+
 public class DoublyLinkedList<T> {
     //
     private iNode<T> headNode;
@@ -79,5 +82,37 @@ public class DoublyLinkedList<T> {
         previousNode.setNextNode(node);
         currentNode.setPreviousNode(node);
         node.setNextNode(currentNode);
+    }
+
+    public T removeFromHead() {
+        if (headNode.getNextNode() == tailNode || size == 0) {
+            throw new EmptyListException("List is empty.");
+        }
+        size--;
+        iNode<T> node = headNode.getNextNode();
+        headNode = headNode.getNextNode();
+        return node.getValue();
+    }
+
+    public T getHeadValue() {
+        //
+        return headNode.getNextNode().getValue();
+    }
+
+    public T getTailValue() {
+        //
+        return tailNode.getPreviousNode().getValue();
+    }
+
+    public boolean contains(T value) {
+        //
+        iNode<T> currentNode = this.headNode.getNextNode();
+        while (currentNode.getNextNode() != null) {
+            if (currentNode.getValue().equals(value)) {
+                return true;
+            }
+            currentNode = currentNode.getNextNode();
+        }
+        return false;
     }
 }
