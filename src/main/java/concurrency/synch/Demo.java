@@ -1,6 +1,5 @@
 package concurrency.synch;
 
-import java.util.List;
 
 public class Demo {
     //
