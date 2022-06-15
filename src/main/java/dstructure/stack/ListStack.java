@@ -39,4 +39,9 @@ public class ListStack<T> {
         //
         return head.contains(value);
     }
+
+    public int size() {
+        //
+        return head.size();
+    }
 }
